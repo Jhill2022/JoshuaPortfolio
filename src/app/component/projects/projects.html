@@ -1,0 +1,448 @@
+<section
+  id="projects"
+  class="min-h-screen flex items-center py-20 px-4 bg-[#2a2a2a]"
+>
+  <div class="max-w-6xl mx-auto w-full">
+
+    <!-- Section Header -->
+    <div class="mb-12">
+
+      <p
+        class="text-blue-400 mb-2 uppercase tracking-widest text-sm"
+      >
+        My work
+      </p>
+
+      <h2 class="text-white text-4xl">
+        Featured Projects
+      </h2>
+
+      <div class="w-20 h-1 bg-blue-500 mt-4"></div>
+
+    </div>
+
+
+    <!-- Projects Grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+      @for (project of projects; track project.title; let i = $index) {
+
+        <!-- Project Card -->
+        <div
+          (click)="openProject(i)"
+          class="bg-[#222222]
+                 rounded-xl
+                 overflow-hidden
+                 border border-slate-700
+                 hover:border-blue-500
+                 transition-all
+                 group
+                 cursor-pointer
+                 hover:-translate-y-2"
+        >
+
+          <!-- Project Image -->
+          <div
+            class="relative h-48
+                   overflow-hidden
+                   bg-slate-800"
+          >
+
+            <img
+              [src]="project.image"
+              [alt]="project.title"
+              class="w-full h-full object-cover
+                     group-hover:scale-110
+                     transition-transform duration-500"
+            />
+
+            <!-- Image Overlay -->
+            <div
+              class="absolute inset-0
+                     bg-gradient-to-t
+                     from-[#222222]
+                     via-[#222222]/20
+                     to-transparent
+                     opacity-60
+                     group-hover:opacity-40
+                     transition-opacity"
+            ></div>
+
+          </div>
+
+
+          <!-- Project Content -->
+          <div class="p-6">
+
+            <h3 class="mb-2 text-white text-xl">
+              {{ project.title }}
+            </h3>
+
+            <p
+              class="text-slate-400
+                     text-sm
+                     mb-4
+                     line-clamp-2"
+            >
+              {{ project.description }}
+            </p>
+
+
+            <!-- Tags -->
+            <div class="flex flex-wrap gap-2 mb-4">
+
+              @for (tag of project.tags.slice(0, 3); track tag) {
+
+                <span
+                  class="px-3 py-1
+                         bg-blue-500/10
+                         text-blue-400
+                         text-xs
+                         rounded-full
+                         border border-blue-500/20"
+                >
+                  {{ tag }}
+                </span>
+
+              }
+
+              @if (project.tags.length > 3) {
+
+                <span
+                  class="px-3 py-1
+                         bg-slate-800
+                         text-slate-400
+                         text-xs
+                         rounded-full"
+                >
+                  +{{ project.tags.length - 3 }}
+                </span>
+
+              }
+
+            </div>
+
+
+            <!-- View Details -->
+            <div
+              class="text-blue-400
+                     text-sm
+                     group-hover:text-blue-300
+                     transition-colors
+                     flex items-center gap-1"
+            >
+              View Details
+
+              <span
+                class="group-hover:translate-x-1
+                       transition-transform"
+              >
+                →
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      }
+
+    </div>
+
+  </div>
+
+
+  <!-- ========================= -->
+  <!-- PROJECT MODAL -->
+  <!-- ========================= -->
+
+  @if (selectedProject !== null) {
+
+    <div
+      class="fixed inset-0
+             bg-black/80
+             z-50
+             flex items-center justify-center
+             p-4
+             overflow-y-auto
+             backdrop-blur-sm"
+      (click)="closeProject()"
+    >
+
+      <!-- Modal -->
+      <div
+        class="bg-[#222222]
+               rounded-2xl
+               max-w-5xl
+               w-full
+               my-8
+               border border-slate-700
+               relative
+               animate-in
+               fade-in
+               zoom-in
+               duration-300"
+        (click)="$event.stopPropagation()"
+      >
+
+        <!-- Close Button -->
+        <button
+          type="button"
+          (click)="closeProject()"
+          class="absolute
+                 top-4
+                 right-4
+                 z-10
+                 w-10
+                 h-10
+                 bg-slate-800
+                 hover:bg-slate-700
+                 rounded-full
+                 flex items-center justify-center
+                 text-slate-400
+                 hover:text-white
+                 transition-colors"
+          aria-label="Close"
+        >
+
+          <lucide-icon
+            [img]="X"
+            [size]="20"
+          ></lucide-icon>
+
+        </button>
+
+
+        <div class="grid lg:grid-cols-2 gap-0">
+
+          <!-- Modal Image -->
+          <div
+            class="relative
+                   h-80
+                   lg:h-auto
+                   overflow-hidden
+                   bg-slate-800"
+          >
+
+            <img
+              [src]="projects[selectedProject].image"
+              [alt]="projects[selectedProject].title"
+              class="w-full h-full object-cover"
+            />
+
+            <div
+              class="absolute inset-0
+                     bg-gradient-to-t
+                     from-slate-900/60
+                     to-transparent"
+            ></div>
+
+          </div>
+
+
+          <!-- Modal Content -->
+          <div
+            class="p-8
+                   lg:p-10
+                   flex flex-col
+                   justify-center
+                   max-h-[600px]
+                   overflow-y-auto"
+          >
+
+            <!-- Role -->
+            <div class="mb-3">
+
+              <span
+                class="text-blue-400
+                       text-sm
+                       uppercase
+                       tracking-wider"
+              >
+                {{ projects[selectedProject].role }}
+              </span>
+
+            </div>
+
+
+            <!-- Title -->
+            <h3
+              class="mb-3
+                     text-white
+                     text-3xl"
+            >
+              {{ projects[selectedProject].title }}
+            </h3>
+
+
+            <!-- Description -->
+            <p
+              class="text-slate-300
+                     mb-6
+                     leading-relaxed"
+            >
+              {{ projects[selectedProject].description }}
+            </p>
+
+
+            <!-- Key Features -->
+            <div class="mb-6">
+
+              <h4
+                class="text-white
+                       text-sm
+                       mb-3
+                       uppercase
+                       tracking-wide"
+              >
+                Key Features
+              </h4>
+
+
+              <ul class="space-y-2">
+
+                @for (
+                  detail of projects[selectedProject].details;
+                  track detail
+                ) {
+
+                  <li
+                    class="text-slate-400
+                           text-sm
+                           flex items-start"
+                  >
+
+                    <span
+                      class="text-blue-400
+                             mr-2
+                             mt-1"
+                    >
+                      ▸
+                    </span>
+
+                    <span>
+                      {{ detail }}
+                    </span>
+
+                  </li>
+
+                }
+
+              </ul>
+
+            </div>
+
+
+            <!-- Impact -->
+            <div
+              class="mb-6
+                     p-4
+                     bg-blue-500/10
+                     border border-blue-500/20
+                     rounded-lg"
+            >
+
+              <p class="text-blue-300 text-sm">
+
+                <span class="text-blue-400">
+                  Impact:
+                </span>
+
+                {{ projects[selectedProject].impact }}
+
+              </p>
+
+            </div>
+
+
+            <!-- All Tags -->
+            <div
+              class="flex flex-wrap
+                     gap-2
+                     mb-6"
+            >
+
+              @for (tag of projects[selectedProject].tags; track tag) {
+
+                <span
+                  class="px-3 py-1.5
+                         bg-slate-800
+                         text-slate-300
+                         text-xs
+                         rounded-lg
+                         border border-slate-700"
+                >
+                  {{ tag }}
+                </span>
+
+              }
+
+            </div>
+
+
+            <!-- Links -->
+            <div class="flex gap-4">
+
+              <!-- GitHub -->
+              <a
+                [href]="projects[selectedProject].github"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center gap-2
+                       px-5 py-2.5
+                       bg-slate-800
+                       text-slate-300
+                       hover:text-white
+                       hover:bg-slate-700
+                       rounded-lg
+                       transition-colors
+                       border border-slate-700"
+              >
+
+                <lucide-icon
+                  [img]="Github"
+                  [size]="18"
+                ></lucide-icon>
+
+                View Code
+
+              </a>
+
+
+              <!-- Live Demo -->
+              <a
+                [href]="projects[selectedProject].demo"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center gap-2
+                       px-5 py-2.5
+                       bg-blue-500
+                       text-white
+                       hover:bg-blue-600
+                       rounded-lg
+                       transition-colors"
+              >
+
+                <lucide-icon
+                  [img]="ExternalLink"
+                  [size]="18"
+                ></lucide-icon>
+
+                Live Demo
+
+              </a>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  }
+
+</section>
