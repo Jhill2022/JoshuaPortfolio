@@ -1,0 +1,159 @@
+<aside
+  class="fixed left-0 top-0 h-screen w-72 bg-[#222222] border-r border-slate-800 flex flex-col z-40 hidden lg:flex"
+>
+  <!-- Profile -->
+  <div class="p-8 border-b border-slate-800">
+    <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-blue-500">
+      <img
+        src="/images/profile-pic.png"
+        alt="Joshua Hill"
+        class="w-full h-full object-cover"
+        style="object-position: center right"
+      />
+    </div>
+
+    <h2 class="text-center text-white mb-1">Joshua Hill</h2>
+
+    <p class="text-center text-slate-400 text-sm">Software Engineer</p>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="flex-1 p-6">
+    <ul class="space-y-2">
+      <!-- Home -->
+      <li>
+        <button
+          type="button"
+          (click)="handleNavClick('home')"
+          class="w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all"
+          [ngClass]="{
+            'bg-blue-500 text-white': activeSection === 'home',
+            'text-slate-400 hover:text-white hover:bg-slate-800': activeSection !== 'home',
+          }"
+        >
+          <lucide-icon [img]="Home" [size]="20"></lucide-icon>
+          <span>Home</span>
+        </button>
+      </li>
+
+      <!-- About -->
+      <li>
+        <button
+          type="button"
+          (click)="handleNavClick('about')"
+          class="w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all"
+          [ngClass]="{
+            'bg-blue-500 text-white': activeSection === 'about',
+            'text-slate-400 hover:text-white hover:bg-slate-800': activeSection !== 'about',
+          }"
+        >
+          <lucide-icon [img]="User" [size]="20"></lucide-icon>
+          <span>About</span>
+        </button>
+      </li>
+
+      <!-- Skills -->
+      <li>
+        <button
+          type="button"
+          (click)="handleNavClick('skills')"
+          class="w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all"
+          [ngClass]="{
+            'bg-blue-500 text-white': activeSection === 'skills',
+            'text-slate-400 hover:text-white hover:bg-slate-800': activeSection !== 'skills',
+          }"
+        >
+          <lucide-icon [img]="Code" [size]="20"></lucide-icon>
+          <span>Skills</span>
+        </button>
+      </li>
+
+      <!-- Projects -->
+      <li>
+        <button
+          type="button"
+          (click)="handleNavClick('projects')"
+          class="w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all"
+          [ngClass]="{
+            'bg-blue-500 text-white': activeSection === 'projects',
+            'text-slate-400 hover:text-white hover:bg-slate-800': activeSection !== 'projects',
+          }"
+        >
+          <lucide-icon [img]="Briefcase" [size]="20"></lucide-icon>
+          <span>Projects</span>
+        </button>
+      </li>
+
+      <!-- Contact -->
+      <li>
+        <button
+          type="button"
+          (click)="handleNavClick('contact')"
+          class="w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all"
+          [ngClass]="{
+            'bg-blue-500 text-white': activeSection === 'contact',
+            'text-slate-400 hover:text-white hover:bg-slate-800': activeSection !== 'contact',
+          }"
+        >
+          <lucide-icon [img]="MessageSquare" [size]="20"></lucide-icon>
+          <span>Contact</span>
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Bottom Section -->
+  <div class="p-6 border-t border-slate-800">
+    <!-- Download CV -->
+    <a
+      href="resume.pdf"
+      download="Joshua-Hill-Resume.pdf"
+      class="w-full mb-4 px-4 py-3 border-2 border-slate-700 text-slate-300 rounded-lg hover:border-transparent hover:text-white transition-all hover:shadow-lg hover:shadow-blue-500/50 flex items-center justify-center gap-2 group relative overflow-hidden"
+    >
+      <!-- Hover background -->
+      <div
+        class="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+      ></div>
+
+      <!-- Download icon -->
+      <lucide-icon [img]="Download" [size]="18" class="relative z-10"></lucide-icon>
+
+      <!-- Text -->
+      <span class="relative z-10 font-semibold"> Download CV </span>
+    </a>
+
+    <!-- Social Links -->
+    <div class="flex gap-4 justify-center">
+      <!-- GitHub -->
+      <a
+        href="https://github.com/YOUR_USERNAME"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="w-10 h-10 flex items-center justify-center rounded-lg bg-slate-800 text-slate-400 hover:text-white hover:bg-blue-500 transition-colors"
+        aria-label="GitHub"
+      >
+        <lucide-icon [img]="Github" [size]="20"></lucide-icon>
+      </a>
+
+      <!-- LinkedIn -->
+      <a
+        href="https://www.linkedin.com/in/YOUR_USERNAME"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="w-10 h-10 flex items-center justify-center rounded-lg bg-slate-800 text-slate-400 hover:text-white hover:bg-blue-500 transition-colors"
+        aria-label="LinkedIn"
+      >
+        <lucide-icon [img]="Linkedin" [size]="20"></lucide-icon>
+      </a>
+
+      <!-- Email -->
+      <a
+        href="mailto:YOUR_EMAIL@example.com"
+        class="w-10 h-10 flex items-center justify-center rounded-lg bg-slate-800 text-slate-400 hover:text-white hover:bg-blue-500 transition-colors"
+        aria-label="Email"
+      >
+        <lucide-icon [img]="Mail" [size]="20"></lucide-icon>
+      </a>
+    </div>
+  </div>
+</aside>
